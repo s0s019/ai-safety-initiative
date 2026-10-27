@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Safety & Governance Initiative</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        },
+                        accent: {
+                            50: '#f0fdf4',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-bg {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#cbd5e1 0.75px, transparent 0.75px);
+            background-size: 24px 24px;
+        }
+        .card-shadow {
+            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+        }
+        .card-shadow:hover {
+            box-shadow: 0 12px 28px -4px rgba(15, 23, 42, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-brand-50 text-brand-900 font-sans antialiased selection:bg-brand-800 selection:text-white">
+
+    <!-- Header / Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-40 bg-white/90 backdrop-blur-md border-b border-brand-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-brand-900 text-white flex items-center justify-center font-bold text-lg shadow-md group-hover:bg-brand-800 transition-colors">
+                        <i class="fa-solid fa-shield-halved text-sm"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-bold text-lg text-brand-900 tracking-tight leading-none">
+                            AISGI
+                        </span>
+                        <span class="text-xs text-brand-500 font-medium">AI Safety & Governance Initiative</span>
+                    </div>
+                </a>
+
+                <!-- Nav Links (Desktop) -->
+                <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-brand-600">
+                    <a href="#about" class="hover:text-brand-900 transition-colors">About</a>
+                    <a href="#curriculum" class="hover:text-brand-900 transition-colors">Curriculum</a>
+                    <a href="#impact" class="hover:text-brand-900 transition-colors">Impact & Structure</a>
+                    <a href="#hubs" class="hover:text-brand-900 transition-colors">Campus Hubs</a>
+                    <a href="#leadership" class="hover:text-brand-900 transition-colors">Leadership</a>
+                </nav>
+
+                <!-- CTA Button -->
+                <div class="hidden md:block">
+                    <button onclick="openApplyModal()" class="px-5 py-2.5 rounded-xl bg-brand-900 hover:bg-brand-800 text-white font-semibold text-sm transition-all shadow-sm active:scale-95 inline-flex items-center gap-2">
+                        <span>Apply for Fellowship</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-btn" type="button" class="md:hidden p-2 rounded-lg text-brand-600 hover:text-brand-900 hover:bg-brand-100">
+                    <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-brand-200 px-4 pt-2 pb-6 space-y-3 shadow-lg">
+            <a href="#about" class="mobile-nav-link block px-3 py-2 rounded-lg text-brand-700 font-medium hover:bg-brand-100">About</a>
+            <a href="#curriculum" class="mobile-nav-link block px-3 py-2 rounded-lg text-brand-700 font-medium hover:bg-brand-100">Curriculum</a>
+            <a href="#impact" class="mobile-nav-link block px-3 py-2 rounded-lg text-brand-700 font-medium hover:bg-brand-100">Impact & Structure</a>
+            <a href="#hubs" class="mobile-nav-link block px-3 py-2 rounded-lg text-brand-700 font-medium hover:bg-brand-100">Campus Hubs</a>
+            <a href="#leadership" class="mobile-nav-link block px-3 py-2 rounded-lg text-brand-700 font-medium hover:bg-brand-100">Leadership</a>
+            <button onclick="openApplyModal()" class="mobile-nav-link block w-full text-center px-4 py-3 rounded-xl bg-brand-900 text-white font-semibold mt-4">Apply for Fellowship</button>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section class="relative min-h-[85vh] flex items-center justify-center py-20 hero-bg border-b border-brand-200">
+            <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+                <!-- Status Tag -->
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-brand-300 text-brand-700 text-xs sm:text-sm font-semibold mb-8 shadow-sm">
+                    <span class="w-2.5 h-2.5 rounded-full bg-accent-500 animate-pulse"></span>
+                    Cohort Preparation in Progress
+                </div>
+
+                <!-- Main Headline -->
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-brand-900 tracking-tight leading-[1.15] mb-6">
+                    Building Africa's Next Generation of <span class="underline decoration-brand-400 underline-offset-8">AI Safety & Governance Leaders</span>
+                </h1>
+
+                <!-- Sub-headline -->
+                <p class="text-lg sm:text-xl text-brand-600 max-w-3xl mx-auto leading-relaxed mb-10 font-normal">
+                    A comprehensive, cross-disciplinary fellowship empowering 80 top students across <strong class="text-brand-900 font-semibold">Addis Ababa University</strong> and <strong class="text-brand-900 font-semibold">Bahir Dar University</strong> to address frontier AI risks, security, and global policy.
+                </p>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto mb-12">
+                    <button onclick="openApplyModal()" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand-900 hover:bg-brand-800 text-white font-bold text-base transition-all shadow-lg hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-3">
+                        <span>Apply for Cohort 1</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                    <a href="#curriculum" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-white hover:bg-brand-100 text-brand-800 border border-brand-300 font-semibold text-base transition-all flex items-center justify-center gap-2 shadow-sm">
+                        <span>Explore Curriculum</span>
+                        <i class="fa-solid fa-book-open text-xs text-brand-400"></i>
+                    </a>
+                </div>
+                <!-- Hero Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto mb-12">
+                    <button onclick="openApplyModal()" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-brand-900 hover:bg-brand-800 text-white font-bold text-base transition-all shadow-lg hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-3">
+                        <span>Apply for Cohort 1</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                    <a href="#curriculum" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-white hover:bg-brand-100 text-brand-800 border border-brand-300 font-semibold text-base transition-all flex items-center justify-center gap-2 shadow-sm">
+                        <span>Explore Curriculum</span>
+                        <i class="fa-solid fa-book-open text-xs text-brand-400"></i>
+                    </a>
+                </div>
+
+                <!-- Support Badge -->
+                <div class="mt-4 pt-6 border-t border-brand-200/80 inline-flex items-center gap-2 text-brand-500 text-xs sm:text-sm font-medium">
+                    <i class="fa-solid fa-award text-brand-700"></i>
+                    <span>Supported by <strong>BlueDot Impact Rapid Grants</strong></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Stats Banner -->
+        <section id="impact" class="py-12 bg-white border-b border-brand-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                    <div class="p-6 rounded-2xl bg-brand-50 border border-brand-200 card-shadow transition-all">
+                        <div class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-900 mb-1">80</div>
+                        <div class="text-xs sm:text-sm font-semibold text-brand-500 uppercase tracking-wider">Fellows Selected</div>
+                    </div>
+                    <div class="p-6 rounded-2xl bg-brand-50 border border-brand-200 card-shadow transition-all">
+                        <div class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-900 mb-1">2</div>
+                        <div class="text-xs sm:text-sm font-semibold text-brand-500 uppercase tracking-wider">Campus Hubs (AAU & BDU)</div>
+                    </div>
+                    <div class="p-6 rounded-2xl bg-brand-50 border border-brand-200 card-shadow transition-all">
+                        <div class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-900 mb-1">Cohorts</div>
+                        <div class="text-xs sm:text-sm font-semibold text-brand-500 uppercase tracking-wider">Structured Training</div>
+                    </div>
+                    <div class="p-6 rounded-2xl bg-brand-50 border border-brand-200 card-shadow transition-all">
+                        <div class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-900 mb-1">40 / 60</div>
+                        <div class="text-xs sm:text-sm font-semibold text-brand-500 uppercase tracking-wider">STEM / Multi-Disciplinary</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About & Mission Section -->
+        <section id="about" class="py-24 bg-brand-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-6 space-y-6">
+                        <div class="inline-flex items-center gap-2 text-brand-600 text-xs font-bold tracking-widest uppercase">
+                            <i class="fa-solid fa-compass"></i> Mission & Vision
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-900 tracking-tight">
+                            Global South Representation in Frontier AI Governance
+                        </h2>
+                        <p class="text-brand-600 text-base sm:text-lg leading-relaxed">
+                            As frontier AI models rapidly advance, ensuring their alignment, security, and beneficial deployment requires diverse global perspectives. Currently, Global South representation in frontier AI risk research and policy frameworks remains minimal.
+                        </p>
+                        <p class="text-brand-600 text-base leading-relaxed">
+                            The <strong>AI Safety & Governance Initiative</strong> bridges this gap by cultivating top student talent to contribute directly to global AI alignment standards, technical guardrails, and international strategy.
+                        </p>
+
+                        <div class="pt-4 border-t border-brand-200 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="flex items-start gap-3">
+                                <div class="p-2.5 rounded-lg bg-white border border-brand-200 text-brand-800 shadow-sm mt-0.5">
+                                    <i class="fa-solid fa-microchip"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-brand-900 font-bold text-sm">Technical Alignment</h4>
+                                    <p class="text-brand-500 text-xs mt-0.5">Model evaluation, red-teaming, and safety guardrails.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="p-2.5 rounded-lg bg-white border border-brand-200 text-brand-800 shadow-sm mt-0.5">
+                                    <i class="fa-solid fa-landmark"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-brand-900 font-bold text-sm">Policy & Governance</h4>
+                                    <p class="text-brand-500 text-xs mt-0.5">International treaties, compute limits, and policy frameworks.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Multi-disciplinary Matrix Card -->
+                    <div class="lg:col-span-6">
+                        <div class="p-8 rounded-3xl bg-white border border-brand-200 card-shadow">
+                            <h3 class="text-xl font-bold text-brand-900 mb-4 flex items-center gap-3">
+                                <i class="fa-solid fa-users-gear text-brand-600"></i>
+                                Multi-Disciplinary Inclusion
+                            </h3>
+                            <p class="text-brand-600 text-sm mb-6">
+                                Addressing complex AI risks requires insights beyond computer science. Our fellowship brings together students from key academic backgrounds:
+                            </p>
+
+                            <div class="space-y-3">
+                                <div class="p-3.5 rounded-xl bg-brand-50 border border-brand-200 flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fa-solid fa-code text-brand-700 w-5 text-center"></i>
+                                        <span class="text-brand-800 text-sm font-semibold">Computer Science & Engineering</span>
+                                    </div>
+                                    <span class="text-xs px-2.5 py-1 rounded-md bg-white text-brand-700 font-medium border border-brand-200">STEM</span>
+                                </div>
+
+                                <div class="p-3.5 rounded-xl bg-brand-50 border border-brand-200 flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fa-solid fa-scale-balanced text-brand-700 w-5 text-center"></i>
+                                        <span class="text-brand-800 text-sm font-semibold">Law & Policy Governance</span>
+                                    </div>
+                                    <span class="text-xs px-2.5 py-1 rounded-md bg-white text-brand-700 font-medium border border-brand-200">Governance</span>
+                                </div>
+
+                                <div class="p-3.5 rounded-xl bg-brand-50 border border-brand-200 flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fa-solid fa-chart-line text-brand-700 w-5 text-center"></i>
+                                        <span class="text-brand-800 text-sm font-semibold">Economics & Strategy</span>
+                                    </div>
+                                    <span class="text-xs px-2.5 py-1 rounded-md bg-white text-brand-700 font-medium border border-brand-200">Social Science</span>
+                                </div>
+
+                                <div class="p-3.5 rounded-xl bg-brand-50 border border-brand-200 flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fa-solid fa-user-doctor text-brand-700 w-5 text-center"></i>
+                                        <span class="text-brand-800 text-sm font-semibold">Medicine & Bio-Security</span>
+                                    </div>
+                                    <span class="text-xs px-2.5 py-1 rounded-md bg-white text-brand-700 font-medium border border-brand-200">Health / STEM</span>
+                                </div>
+
+                                <div class="p-3.5 rounded-xl bg-brand-50 border border-brand-200 flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fa-solid fa-globe text-brand-700 w-5 text-center"></i>
+                                        <span class="text-brand-800 text-sm font-semibold">International Relations & Public Policy</span>
+                                    </div>
+                                    <span class="text-xs px-2.5 py-1 rounded-md bg-white text-brand-700 font-medium border border-brand-200">Policy</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Curriculum Blueprint -->
+        <section id="curriculum" class="py-24 bg-white border-t border-brand-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <div class="inline-flex items-center gap-2 text-brand-600 text-xs font-bold tracking-widest uppercase mb-3">
+                        <i class="fa-solid fa-graduation-cap"></i> Academic Curriculum
+                    </div>
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-brand-900 tracking-tight">Curriculum Blueprint</h2>
+                    <p class="text-brand-500 text-base sm:text-lg mt-4">
+                        A structured cohort curriculum combining machine learning fundamentals with technical safety, alignment, and global AI governance.
+                    </p>
+                </div>
+
+                <!-- Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                    <!-- Module 1 -->
+                    <div class="p-6 rounded-2xl bg-brand-50 border border-brand-200 card-shadow flex flex-col justify-between transition-all hover:-translate-y-1">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs font-bold px-3 py-1 rounded-full bg-white text-brand-800 border border-brand-300">PHASE 1</span>
+                                <i class="fa-solid fa-brain text-brand-400 text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-brand-900 mb-2">Capabilities & Elicitation</h3>
+                            <p class="text-brand-600 text-xs sm:text-sm leading-relaxed mb-4">
+                                Deep dive into foundation model architecture, LLM capabilities, emergent behaviors, and agentic workflows.
+                            </p>
+                        </div>
+                        <ul class="space-y-2 border-t border-brand-200 pt-4 text-xs text-brand-700 font-medium">
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-brand-600 text-xs"></i> Foundation Models & Scaling
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-brand-600 text-xs"></i> Agentic Tool Use & Elicitation
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-brand-600 text-xs"></i> Capability Benchmark Analysis
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Module 2 -->
+                    <div class="p-6 rounded-2xl bg-brand-50 border border-brand-200 card-shadow flex flex-col justify-between transition-all hover:-translate-y-1">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs font-bold px-3 py-1 rounded-full bg-white text-brand-800 border border-brand-300">PHASE 2</span>
+                                <i class="fa-solid fa-triangle-exclamation text-brand-400 text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-brand-900 mb-2">Risks & Misalignment</h3>
+                            <p class="text-brand-600 text-xs sm:text-sm leading-relaxed mb-4">
+                                Analyzing systemic threat models, loss of control scenarios, situational awareness, and emergent misalignment.
+                            </p>
+                        </div>
+                        <ul class="space-y-2 border-t border-brand-200 pt-4 text-xs text-brand-700 font-medium">
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-brand-600 text-xs"></i> Specification Gaming & Deception
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-brand-600 text-xs"></i> Model Evaluations & Awareness
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-brand-600 text-xs"></i> Loss of Control Threat Vectors
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Module 3 -->
+                    <div class="p-6 rounded-2xl bg-brand-50 border border-brand-200 card-shadow flex flex-col justify-between transition-all hover:-translate-y-1">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs font-bold px-3 py-1 rounded-full bg-white text-brand-800 border border-brand-300">PHASE 3</span>
+                                <i class="fa-solid fa-shield-cat text-brand-400 text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-brand-900 mb-2">Security & Guardrails</h3>
+                            <p class="text-brand-600 text-xs sm:text-sm leading-relaxed mb-4">
+                                Technical defenses, prompt injection mitigation, red-teaming methodologies, model auditing, and bio-security.
+                            </p>
+                        </div>
+                        <ul class="space-y-2 border-t border-brand-200 pt-4 text-xs text-brand-700 font-medium">
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-brand-600 text-xs"></i> Adversarial Red-Teaming
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-brand-600 text-xs"></i> Cyber & Biological Defense
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-brand-600 text-xs"></i> Model Auditing Standards
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Module 4 -->
+                    <div class="p-6 rounded-2xl bg-brand-50 border border-brand-200 card-shadow flex flex-col justify-between transition-all hover:-translate-y-1">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs font-bold px-3 py-1 rounded-full bg-white text-brand-800 border border-brand-300">PHASE 4</span>
+                                <i class="fa-solid fa-file-signature text-brand-400 text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-brand-900 mb-2">Governance & Capstones</h3>
+                            <p class="text-brand-600 text-xs sm:text-sm leading-relaxed mb-4">
+                                Exploring international treaties, middle-power strategy, compute governance, and fellow capstone projects.
+                            </p>
+                        </div>
+                        <ul class="space-y-2 border-t border-brand-200 pt-4 text-xs text-brand-700 font-medium">
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-brand-600 text-xs"></i> International Policy & Strategy
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-brand-600 text-xs"></i> Compute Limits & Regulation
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-check text-brand-600 text-xs"></i> Capstone Research Projects
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Campus Hubs Section -->
+        <section id="hubs" class="py-24 bg-brand-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <div class="inline-flex items-center gap-2 text-brand-600 text-xs font-bold tracking-widest uppercase mb-3">
+                        <i class="fa-solid fa-building-columns"></i> Institutional Presence
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-900 tracking-tight">University Campus Hubs</h2>
+                    <p class="text-brand-500 text-base mt-3">
+                        Operating campus research hubs at premier higher education institutions.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <!-- Hub 1: AAU -->
+                    <div class="rounded-3xl bg-white border border-brand-200 card-shadow flex flex-col justify-between overflow-hidden">
+                        <div class="p-8 flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="px-3 py-1 rounded-full bg-brand-100 text-brand-900 text-xs font-bold">40 FELLOWS</span>
+                                    <span class="text-xs font-semibold text-brand-500 uppercase tracking-wider">ADDIS ABABA UNIVERSITY</span>
+                                </div>
+                                <h3 class="text-2xl font-bold text-brand-900 mb-2">Addis Ababa University (AAU Hub)</h3>
+                                <p class="text-brand-600 text-sm leading-relaxed mb-6">
+                                    Situated in the capital, the AAU Hub connects scholars across computer science, law, economics, and international governance to drive policy-oriented AI research.
+                                </p>
+                            </div>
+                            <div class="space-y-2 border-t border-brand-200 pt-4">
+                                <span class="text-xs font-semibold text-brand-400 uppercase tracking-wider block mb-2">Target Academic Faculties:</span>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 rounded-lg bg-brand-50 text-brand-700 text-xs font-medium border border-brand-200">Law</span>
+                                    <span class="px-3 py-1 rounded-lg bg-brand-50 text-brand-700 text-xs font-medium border border-brand-200">Economics</span>
+                                    <span class="px-3 py-1 rounded-lg bg-brand-50 text-brand-700 text-xs font-medium border border-brand-200">Computer Science</span>
+                                    <span class="px-3 py-1 rounded-lg bg-brand-50 text-brand-700 text-xs font-medium border border-brand-200">Engineering</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hub 2: BDU -->
+                    <div class="rounded-3xl bg-white border border-brand-200 card-shadow flex flex-col justify-between overflow-hidden">
+                        <div class="p-8 flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="px-3 py-1 rounded-full bg-brand-100 text-brand-900 text-xs font-bold">40 FELLOWS</span>
+                                    <span class="text-xs font-semibold text-brand-500 uppercase tracking-wider">BAHIR DAR UNIVERSITY</span>
+                                </div>
+                                <h3 class="text-2xl font-bold text-brand-900 mb-2">Bahir Dar University (BDU Hub)</h3>
+                                <p class="text-brand-600 text-sm leading-relaxed mb-6">
+                                    Serving a vibrant regional hub of academic excellence, the BDU Hub mobilizes top STEM innovators, bio-scientists, and policy leaders to tackle technical safety challenges.
+                                </p>
+                            </div>
+                            <div class="space-y-2 border-t border-brand-200 pt-4">
+                                <span class="text-xs font-semibold text-brand-400 uppercase tracking-wider block mb-2">Target Academic Faculties:</span>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 rounded-lg bg-brand-50 text-brand-700 text-xs font-medium border border-brand-200">STEM & Robotics</span>
+                                    <span class="px-3 py-1 rounded-lg bg-brand-50 text-brand-700 text-xs font-medium border border-brand-200">Public Policy</span>
+                                    <span class="px-3 py-1 rounded-lg bg-brand-50 text-brand-700 text-xs font-medium border border-brand-200">Social Sciences</span>
+                                    <span class="px-3 py-1 rounded-lg bg-brand-50 text-brand-700 text-xs font-medium border border-brand-200">Medicine</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leadership Section -->
+        <section id="leadership" class="py-24 bg-white border-t border-brand-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <div class="inline-flex items-center gap-2 text-brand-600 text-xs font-bold tracking-widest uppercase mb-3">
+                        <i class="fa-solid fa-user-gear"></i> Initiative Leadership
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-900 tracking-tight">Organizer Spotlight</h2>
+                </div>
+
+                <div class="max-w-3xl mx-auto">
+                    <div class="p-8 sm:p-10 rounded-3xl bg-brand-50 border border-brand-200 card-shadow">
+                        <div class="space-y-3 text-center sm:text-left">
+                            <div class="flex items-center gap-3 justify-center sm:justify-start">
+                                <div class="w-10 h-10 rounded-xl bg-brand-900 text-white flex items-center justify-center font-bold text-base">
+                                    <i class="fa-solid fa-user"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-bold text-brand-900">Bethelhem</h3>
+                                    <p class="text-brand-600 text-sm font-semibold">Founder & Initiative Coordinator</p>
+                                </div>
+                            </div>
+                            <p class="text-brand-600 text-sm sm:text-base leading-relaxed pt-2">
+                                Student at Addis Ababa University. Founder of Last Mile Integration Network & Impact Hubs, leading field operations, community strategy, and youth capacity-building initiatives.
+                            </p>
+                            <div class="flex items-center justify-center sm:justify-start gap-4 pt-2">
+                                <a href="mailto:contact@aisgi.org" class="text-brand-400 hover:text-brand-900 transition-colors text-lg">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Application Link Section (CTA) -->
+        <section id="apply" class="py-24 bg-brand-50 border-t border-brand-200">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="p-8 sm:p-12 rounded-3xl bg-white border border-brand-200 card-shadow">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-100 text-brand-900 flex items-center justify-center mx-auto mb-6 text-2xl">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </div>
+
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-brand-900 tracking-tight mb-4">
+                        Ready to Join the Fellowship?
+                    </h2>
+                    <p class="text-brand-600 text-base sm:text-lg max-w-2xl mx-auto mb-8">
+                        Join driven student leaders at AAU & BDU for upcoming cohorts in AI Safety and Governance.
+                    </p>
+
+                    <!-- Application Link Trigger -->
+                    <div class="space-y-4">
+                        <button onclick="openApplyModal()" class="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-brand-900 hover:bg-brand-800 text-white font-bold text-lg transition-all shadow-md hover:scale-105 active:scale-100 w-full sm:w-auto">
+                            <span>Apply for Upcoming Cohort</span>
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </button>
+                        <p class="text-brand-500 text-xs sm:text-sm pt-2">
+                            <i class="fa-solid fa-circle-info text-brand-700 mr-1"></i>
+                            <strong>Eligibility:</strong> Undergraduate & Graduate students currently enrolled at <strong>Addis Ababa University (AAU)</strong> or <strong>Bahir Dar University (BDU)</strong>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal Dialog for Application Status -->
+    <div id="apply-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-brand-900/40 backdrop-blur-sm transition-opacity">
+        <div class="bg-white rounded-3xl border border-brand-200 max-w-md w-full p-6 sm:p-8 card-shadow relative animate-fade-in text-center">
+            <button onclick="closeApplyModal()" class="absolute top-4 right-4 text-brand-400 hover:text-brand-900 w-8 h-8 rounded-full flex items-center justify-center hover:bg-brand-100 transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="w-14 h-14 bg-brand-100 text-brand-800 rounded-2xl flex items-center justify-center mx-auto mb-4 text-xl">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+            </div>
+            <h3 class="text-xl font-bold text-brand-900 mb-2">Program Preparation in Progress</h3>
+            <p class="text-brand-600 text-sm leading-relaxed mb-6">
+                We are currently finalizing logistics and preparations to launch the program. Please check back shortly for cohort application details!
+            </p>
+            <button onclick="closeApplyModal()" class="w-full py-3 rounded-xl bg-brand-900 hover:bg-brand-800 text-white font-semibold text-sm transition-colors">
+                Understood
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-brand-200 py-12 text-brand-500 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center border-b border-brand-200 pb-8 mb-8">
+                <div>
+                    <span class="font-bold text-brand-900 text-base">AI Safety & Governance Initiative</span>
+                    <p class="text-brand-500 text-xs mt-1">Empowering regional research and governance leaders in AI safety.</p>
+                </div>
+                
+                <div class="flex items-center justify-center gap-6">
+                    <a href="mailto:contact@aisgi.org" class="text-brand-500 hover:text-brand-900 transition-colors flex items-center gap-2 text-xs font-medium">
+                        <i class="fa-solid fa-envelope text-base"></i> Contact Us
+                    </a>
+                </div>
+
+                <div class="text-right md:text-right text-xs text-brand-500 font-medium">
+                    Supported by <strong>BlueDot Impact Rapid Grants</strong>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-between text-xs text-brand-400">
+                <p>© 2026 AI Safety & Governance Initiative. All rights reserved.</p>
+                <p class="mt-2 sm:mt-0">Built for impact.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const navLinks = document.querySelectorAll('.mobile-nav-link');
+
+            menuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    menuIcon.classList.remove('fa-xmark');
+                    menuIcon.classList.add('fa-bars');
+                } else {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-xmark');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('fa-xmark');
+                    menuIcon.classList.add('fa-bars');
+                });
+            });
+        });
+
+        function openApplyModal() {
+            document.getElementById('apply-modal').classList.remove('hidden');
+        }
+
+        function closeApplyModal() {
+            document.getElementById('apply-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
